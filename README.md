@@ -168,15 +168,11 @@ heightOfObject++;
 ```
 
 From the last code section, we need to mention:
-1.	The 
-```c++
-sendInstructionToER7(x,y,z)
-```
-function was created in order to solve some of the problems found when programming.
-2.	After every movement (Picking an object and place it in the pyramid), the arm comes back to the *H0* position.
-3.	After some measures, the *z* value moved for the object when appalling was of 390, in order to have 1mm of error margin when stacking the objects.
-4.	Before this set of instructions is performed, the program checks if the object is reachable or not by:
-	1.	Using an overrided *sendReceiveInstructionToER7* function described as follow
+1. The *sendInstructionToER7(x,y,z)* function was created in order to solve some of the problems found when programming.
+2. After every movement (Picking an object and place it in the pyramid), the arm comes back to the *H0* position.
+3. After some measures, the *z* value moved for the object when appalling was of 390, in order to have 1mm of error margin when stacking the objects.
+4. Before this set of instructions is performed, the program checks if the object is reachable or not by:
+    1. Using an overrided *sendReceiveInstructionToER7* function described as follow
     ```c++
 	void sendReceiveInstructionToER7(int i1, char* s1){
 		char buf[50];
@@ -184,8 +180,7 @@ function was created in order to solve some of the problems found when programmi
 		rs232_sendCmd(hCom, buf, s1);
 	}
     ```
-
-	2.	The previous overrided function is used in the following code
+    2. The previous overrided function is used in the following code
     ```c++
 	sendReceiveInstructionToER7("TEACH TMP",objectNumber,bufReply[0]);
 	sendReceiveInstructionToER7(x,bufReply[1]);
