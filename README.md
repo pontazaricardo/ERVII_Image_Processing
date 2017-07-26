@@ -3,6 +3,8 @@
 ## Introduction
 The main idea of this file is to present the analysis, design, problems and implementation of a c++ program instance that could control the ERVII (ER7) arm in order to detect several different objects and manipulate them in such a way that could be staffed in a pyramid ordered by size.
 
+To see it in action (YouTube video), click [here](https://www.youtube.com/watch?v=FMrCx9Y_RpU).
+
 ## Goal
 
 This project's main goal is stated as \emph{Given a set of randomly picked objects, you need to locate these objects through a given camera and pick and place these objects as a stack.} With this idea in mind, the logic of the processes needed to solve this were stated as
@@ -205,3 +207,5 @@ From the last code section, we need to mention:
 # Results
 
 The provided code is able to successfully control an ERVII arm, make image processing of the objects it needs to grab, and create a pyramid (sorted by size) of those objects.
+
+To see it in action (YouTube video), click [here](https://www.youtube.com/watch?v=FMrCx9Y_RpU).
