@@ -121,7 +121,7 @@ Because our system only counts with one camera, the depth of the objects was obt
 
 Before the object position calculations are made, is necessary to manipulate the picture before hand in order to get an accurate number for our actual system. We obtain a picture like the following after all the camera transformations and the *findContours* method have been applied.
 
-![object contours](/images/graph1.JPG?raw=true)
+![object contours](/images/graph1.jpg?raw=true)
 
 After each object's information is calculated, is displayed on console, so the user can get the information of it.
 
