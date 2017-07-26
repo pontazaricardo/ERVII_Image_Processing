@@ -113,3 +113,100 @@ The methods from the *openCV* libraries that were used are, specifically, *blur,
 In order to find the general movement equations that could describe the system, the inverse kinematics were developed from the system described in Figure 1.
 
 ![inverse kinematics](/images/graph0.JPG?raw=true)
+
+Because our system only counts with one camera, the depth of the objects was obtained by hand, getting an approx of 4 cms of thickness on the objects. In order to make the pile, the high of it must be saved in a variable and carried on along the overall run.
+
+
+## Calculation of object positions and arm movement
+
+Before the object position calculations are made, is necessary to manipulate the picture before hand in order to get an accurate number for our actual system. We obtain a picture like the following after all the camera transformations and the *findContours* method have been applied.
+
+![object contours](/images/graph1.JPG?raw=true)
+
+After each object's information is calculated, is displayed on console, so the user can get the information of it.
+
+The *main()* has a 
+
+```c++
+er7Actions(obtainObjectsAndNumbers());
+```
+where *obtainObjectsAndNumbers()* is an *objectsAndNumbers* class method, which returns the objects already analyzed by the camera and the number of objects as well. In order to calculate the height, place of movement and height of the pyramid to the ER7 arm, the *SETPVC* and *MOVE* instructions were used as follow
+
+```c++
+cout << "[Object inside working area" << endl;
+z+=390;
+sendInstructionToER7("SETPVC TMP",numerOfObjects ," z ", z);
+sendInstructionToER7("MOVE TMP");
+Sleep(1000);
+z-=390;
+sendInstructionToER7("SETPVC TMP",numerOfObjects ," z ", z);
+sendInstructionToER7("MOVE TMP");
+Sleep(1000);
+sendInstructionToER7("CLOSE");
+Sleep(1000);
+z+=390*(heightOfObject+1);
+rollOfObject=-201+((-1)*objectsAndNumbersInput.vectorObject[baseObjectIndex].phi-objectsAndNumbersInput.vectorObject[baseObjectIndex].gyrumAngle)/pi*(180*10);
+sendInstructionToER7("SETPVC TMP",numerOfObjects," z ", z);
+sendInstructionToER7("SETPVC TMP",numerOfObjects," r ", rollOfObject);
+sendInstructionToER7("MOVE TMP%d",numerOfObjects);
+Sleep(1000);
+gotoPointNew(objectsAndNumbersInput.vectorObject[baseObjectIndex].centroid.x,
+          objectsAndNumbersInput.vectorObject[baseObjectIndex].centroid.y, z, -900, rollOfObject);
+Sleep(1000);
+z-=385;
+sendInstructionToER7("SETPVC TMP",numerOfObjects," z ", z);
+sendInstructionToER7("MOVE TMP%d",numerOfObjects);
+Sleep(1000);
+sendInstructionToER7("OPEN");
+Sleep(1000);
+z+=500;
+sendInstructionToER7("SETPVC TMP",numerOfObjects," z ", z);
+sendInstructionToER7("MOVE TMP%d",numerOfObjects);
+Sleep(1000);
+sendInstructionToER7("MOVE ORIG");
+heightOfObject++;
+```
+
+From the last code section, we need to mention:
+1. The 
+```c++
+sendInstructionToER7(x,y,z)
+```
+function was created in order to solve some of the problems found when programming.
+2. After every movement (Picking an object and place it in the pyramid), the arm comes back to the *H0* position.
+3. After some measures, the *z* value moved for the object when appalling was of 390, in order to have 1mm of error margin when stacking the objects.
+4. Before this set of instructions is performed, the program checks if the object is reachable or not by
+	1. Using an overrided *sendReceiveInstructionToER7* function described as follow
+    ```c++
+	void sendReceiveInstructionToER7(int i1, char* s1){
+		char buf[50];
+		sprintf(buf, "%d", i1);
+		rs232_sendCmd(hCom, buf, s1);
+	}
+    ```
+
+	2.The previous overrided function is used in the following code
+    ```c++
+	sendReceiveInstructionToER7("TEACH TMP",objectNumber,bufReply[0]);
+	sendReceiveInstructionToER7(x,bufReply[1]);
+	sendReceiveInstructionToER7(y,bufReply[2]);
+	sendReceiveInstructionToER7(z,bufReply[3]);
+	sendReceiveInstructionToER7(p,bufReply[4]);
+	sendReceiveInstructionToER7(r,bufReply[5]); //GOT FINAL ANSWER FOR R
+	//If final answer is BAD POINT COORDINATES, means that the object is out of working space
+	char *finalAnswer=strstr(bufReply[5],"Bad");
+	if(finalAnswer==NULL){
+		return true;
+	}
+	//TRY to confirm if 'BAD POINT COORDINATES' is gotten
+	memcpy(verifyPointer,finalAnswer,9);
+	verifyPointer[9]='\0';
+	if(strcmp(verifyPointer,"Bad point")==0){
+		return false;
+	}
+	return true;
+	```
+
+# Results
+
+The provided code is able to successfully control an ERVII arm, make image processing of the objects it needs to grab, and create a pyramid (sorted by size) of those objects.
