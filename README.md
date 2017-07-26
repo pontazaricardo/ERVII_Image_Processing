@@ -7,7 +7,7 @@ To see it in action (YouTube video), click [here](https://www.youtube.com/watch?
 
 ## Goal
 
-This project's main goal is stated as \emph{Given a set of randomly picked objects, you need to locate these objects through a given camera and pick and place these objects as a stack.} With this idea in mind, the logic of the processes needed to solve this were stated as
+This project's main goal is stated as: Given a set of randomly picked objects, you need to locate these objects through a given camera and pick and place these objects as a stack. With this idea in mind, the logic of the processes needed to solve this were stated as
 1. Obtain images from camera.
 2. Work on camera calibration.
 3. Work on the inverse kinematics (when solvable)
