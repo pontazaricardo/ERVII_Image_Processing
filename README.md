@@ -58,7 +58,7 @@ and the interface stated as
 objectsAndNumbers obtainObjectsAndNumbers();
 ```
 
-The *obtainObjectsAndNumbers()* returns an abstract object made of two objects, a *vector<object> vectorObject* which is the list of the already analyzed objects, and a *int numberOfObjects* which contains the number of objects obtained.
+The *obtainObjectsAndNumbers()* returns an abstract object made of two objects, a *vector<object>* *vectorObject* which is the list of the already analyzed objects, and a *int* *numberOfObjects* which contains the number of objects obtained.
 
 ### Note
 From the above code, we can see that all the necessary characteristics are inside the *objectsAndNumbers* abstract structure. In order to access the properties of the *n*-th object, the path that is needed is just
