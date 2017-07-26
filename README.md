@@ -209,3 +209,5 @@ From the last code section, we need to mention:
 The provided code is able to successfully control an ERVII arm, make image processing of the objects it needs to grab, and create a pyramid (sorted by size) of those objects.
 
 To see it in action (YouTube video), click [here](https://www.youtube.com/watch?v=FMrCx9Y_RpU).
+
+[![Arm](/images/arm.png?raw=true)](https://www.youtube.com/watch?v=FMrCx9Y_RpU)
