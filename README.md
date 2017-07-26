@@ -83,3 +83,33 @@ Because the *vectorObject[n]* requires an specific number to be accessed, is was
 
 These abstract objects were necessary to be created in order to save and use in a more order way the objects' analysis results obtained from the camera analysis.
 
+# openCV methods
+
+After capturing the image from the camera, several processes are needed to be performed before the contours can be calculated (As well as the barycenters and inertial axis of the objects). We have then the code
+
+```c++
+Mat resultRealWorldImage;
+resultRealWorldImage = realWorldImage.clone();
+//Apply blur, binarization and dilatation
+blur(resultRealWorldImage, resultRealWorldImage, Size(6,6));
+threshold(resultRealWorldImage, resultRealWorldImage, 80, 255, CV_THRESH_BINARY);
+erode(resultRealWorldImage,resultRealWorldImage, Mat(6,6,0));
+dilate(resultRealWorldImage,resultRealWorldImage, Mat(6,6,0));
+//Finding contours process begins
+//Objects for managing obtained information of contours
+vector<vector<Point> > foundContours;
+vector<Vec4i> outputArrayHierarchy;
+//Finding contour methods
+Canny(resultRealWorldImage, resultRealWorldImage, 100, 255, 3);
+//Applies Canny edge detector and produces the edge map.
+findContours(resultRealWorldImage, foundContours, outputArrayHierarchy, CV_RETR_TREE, 
+       CV_CHAIN_APPROX_SIMPLE, Point(0,0));
+```
+
+The methods from the *openCV* libraries that were used are, specifically, *blur, threshold, erode, dilate, canny* and *findcontours*. After this transformations, aspects like the inertial axis, barycenters and areas can be calculated from the objects.
+
+# Inverse kinematics
+
+In order to find the general movement equations that could describe the system, the inverse kinematics were developed from the system described in Figure 1.
+
+![inverse kinematics](/images/graph0.JPG?raw=true)
