@@ -30,3 +30,51 @@ int main(){
     return 0;
 }
 ```
+The camera administration is made under the *obtainObjectsAndNumbers()* method, which is a 
+customized object structure called *objectsAndNumbers*, where both the structures involved and the abstract constructor are stated as follow:
+
+```c++
+struct object{
+    //properties
+    double area;
+    double phi;
+    double gyrumAngle;
+    double principalAngle;
+    Point2f centroid;
+};
+
+struct objectsAndNumbers{
+    //properties
+    vector<object> vectorObject;
+    int numberOfObjects;
+    //Constructor
+    objectsAndNumbers(vector<object> vectorObjectInput,int numberOfObjectsInput): 
+         vectorObject(vectorObjectInput), numberOfObjects(numberOfObjectsInput){ }
+};
+```
+and the interface stated as
+
+```c++
+objectsAndNumbers obtainObjectsAndNumbers();
+```
+
+The *obtainObjectsAndNumbers()* returns an abstract object made of two objects, a *vector<object> vectorObject* which is the list of the already analyzed objects, and a *int numberOfObjects* which contains the number of objects obtained.
+
+### Note
+From the above code, we can see that all the necessary characteristics are inside the *objectsAndNumbers* abstract structure. In order to access the properties of the *n*-th object, the path that is needed is just
+```c++
+&obtainObjectsAndNumbers().vectorObject[n].area;
+&obtainObjectsAndNumbers().vectorObject[n].phi;
+&obtainObjectsAndNumbers().vectorObject[n].gyrumAngle;
+&obtainObjectsAndNumbers().vectorObject[n].principalAngle;
+&obtainObjectsAndNumbers().vectorObject[n].centroid;
+```
+
+and to access the number of objects is just needed
+```c++
+&obtainObjectsAndNumbers().numberOfObjects;
+```
+Because the *vectorObject[n]* requires an specific number to be accessed, is was easier to carry with the number of objects from the previous method and add it as an object in the structure than calculating from the *vectorObject[]* itself.
+
+These abstract objects were necessary to be created in order to save and use in a more order way the objects' analysis results obtained from the camera analysis.
+
