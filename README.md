@@ -169,6 +169,7 @@ heightOfObject++;
 
 From the last code section, we need to mention:
 1.	The 
+```c++
 sendInstructionToER7(x,y,z)
 ```
 function was created in order to solve some of the problems found when programming.
