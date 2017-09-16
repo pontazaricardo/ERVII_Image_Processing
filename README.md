@@ -212,4 +212,4 @@ The provided code is able to successfully control an ERVII arm, make image proce
 
 To see it in action (YouTube video), click [here](https://www.youtube.com/watch?v=FMrCx9Y_RpU).
 
-[![Arm](/images/arm.png?raw=true)](https://www.youtube.com/watch?v=FMrCx9Y_RpU)
+[![Arm](/images/demo.gif?raw=true)](https://www.youtube.com/watch?v=FMrCx9Y_RpU)
