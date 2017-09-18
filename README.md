@@ -3,7 +3,7 @@
 ## Introduction
 The main idea of this file is to present the analysis, design, problems and implementation of a c++ program instance that could control the ERVII (ER7) arm in order to detect several different objects and manipulate them in such a way that could be staffed in a pyramid ordered by size.
 
-![demo](/images/demo.gif?raw=true)
+![demo](/images/gif/demo.gif?raw=true)
 
 To see it in action (YouTube video), click [here](https://www.youtube.com/watch?v=FMrCx9Y_RpU).
 
